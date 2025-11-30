@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy static site to GitHub Pages (gh-pages)
 
 on:
   push:
@@ -6,33 +6,44 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
   pages: write
-  id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Fix CSS filename (if you accidentally used styles.ccs)
+      - name: Show repo files (debug)
+        run: |
+          echo "Current branch:"
+          git rev-parse --abbrev-ref HEAD || true
+          echo "Repo root listing:"
+          ls -la
+
+      - name: Fix CSS filename if mistyped (styles.ccs -> styles.css)
         run: |
           if [ -f styles.ccs ]; then
             echo "Renaming styles.ccs -> styles.css"
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
             mv styles.ccs styles.css
+            git add styles.css
+            git commit -m "Fix: rename styles.ccs -> styles.css" || echo "no changes to commit"
           else
             echo "No styles.ccs file found, skipping rename"
           fi
-          echo "Repo root files:"
+          echo "Files now:"
           ls -la
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: ./   # publish repository root (index.html must be here)
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./    # publish repository root (index.html should be here)
+          publish_branch: gh-pages
+          # optional: set committer identity shown in gh-pages commits
+          # commit_message: "Deploy static site: ${{ github.sha }}"
