@@ -49,10 +49,31 @@ img{max-width:100%;display:block}
   box-shadow:0 10px 28px rgba(0,180,255,0.06);
 }
 
-/* Hero */
-.hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
-@media (max-width:600px){ .hero{grid-template-columns:1fr} }
+/* ---------------- HERO LAYOUT ----------------
+   Use .hero for section container and .hero-inner for the grid.
+   This enforces a left flexible column + right fixed column until small screens.
+*/
+.hero { margin-bottom: 6px; } /* keep small gap */
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 360px; /* left: flexible, right: fixed width */
+  gap: 28px;
+  align-items: start;
+}
 
+/* Fallback if some places still rely on .hero grid */
+.hero{ /* keep a safe default */
+  display:block;
+}
+
+/* Only collapse to single column on very small screens */
+@media (max-width:600px){
+  .hero-inner {
+    grid-template-columns: 1fr; /* stack for phones */
+  }
+}
+
+/* Card base */
 .card{
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border-radius:var(--radius);
@@ -61,6 +82,7 @@ img{max-width:100%;display:block}
   box-shadow: 0 14px 40px rgba(6,10,20,0.6);
 }
 
+/* Hero text */
 .hero-text h2{font-size:40px;line-height:1.02;margin-bottom:12px}
 @media (max-width:680px){ .hero-text h2{font-size:28px} }
 
@@ -85,7 +107,12 @@ img{max-width:100%;display:block}
 .pills{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
 .pill{background:var(--surface);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;font-size:13px;border:1px solid rgba(255,255,255,0.02)}
 
-/* profile card */
+/* ---------------- PROFILE (right column) --------------- */
+.hero-card { width: 100%; align-self: start; order: 0; } /* ensure right column behavior */
+/* .profile-tilt class used for interactive tilt effect */
+.profile-tilt{transition:transform .18s ease; will-change:transform}
+.profile-tilt:hover{transform:rotate(-2deg) translateY(-6px)}
+
 .hero-card .card{padding:18px;border-radius:18px;position:relative;overflow:visible}
 .profile-title{color:var(--accent-a);font-weight:700;margin-bottom:6px;font-size:18px}
 .meta-list{color:var(--muted);font-size:14px;line-height:1.6}
@@ -100,7 +127,15 @@ img{max-width:100%;display:block}
 }
 .hero-card .card > *{position:relative; z-index:1}
 
-/* project area */
+/* Make profile card optionally sticky on larger screens */
+@media (min-width:980px){
+  .hero-card .card {
+    position: sticky;
+    top: 88px; /* adjust to keep below header */
+  }
+}
+
+/* ---------------- PROJECTS / SECTIONS ------------------ */
 .section-title{
   color:#ffffff;
   font-size:20px;
@@ -139,11 +174,12 @@ section{margin-top:64px}
   font-weight:700;
   font-size:18px;
   text-decoration:none;
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  transition: color 0.2s ease, text-shadow 0.2s ease, transform 0.12s ease;
 }
 .project-card h3 a:hover{
   color:var(--accent-a);
   text-shadow: 0 0 8px rgba(0, 180, 255, 0.35);
+  transform:translateY(-2px);
 }
 .project-card .muted{color:var(--muted);font-size:13px}
 .chips{list-style:none;display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;padding-left:0}
@@ -165,6 +201,8 @@ section{margin-top:64px}
 .fade-up[style*="animation-delay"]{ /* ensures delay applied inline works */ }
 @keyframes fadeUp{to{opacity:1;transform:none}}
 
+/* accessibility: focus visible */
+a:focus, button:focus { outline: 3px solid rgba(0,180,255,0.12); outline-offset:3px; border-radius:8px; }
+
 /* micro interaction for profile card */
-.profile-tilt{transition:transform .18s ease; will-change:transform}
-.profile-tilt:hover{transform:rotate(-2deg) translateY(-6px)}
+/* left intentionally light — main tilt script handles pointer movement */
