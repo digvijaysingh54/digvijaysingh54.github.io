@@ -2,123 +2,462 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Digvijay Singh — DevOps / SRE</title>
+  <title>Digvijay Singh | DevOps Engineer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio of Digvijay Singh, DevOps Engineer with 3+ years of experience in AWS, Kubernetes, CI/CD, Terraform, and automation." />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --chip-bg: #eef2ff;
+    }
 
-  <link rel="stylesheet" href="styles.css" />
-  <meta name="description" content="Digvijay Singh — DevOps / SRE. Kubernetes, Terraform, CI/CD, GitHub Actions." />
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #e0ecff, #f5f7fb 55%);
+      color: var(--fg);
+      line-height: 1.5;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 32px auto;
+      padding: 0 16px 48px;
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.2fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      padding: 20px 22px;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+    }
+
+    header.card {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      padding: 22px 22px 20px;
+    }
+
+    .avatar {
+      width: 76px;
+      height: 76px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+    }
+
+    .header-main h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .header-main h2 {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .header-meta {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .header-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .header-meta span::before {
+      content: "•";
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .header-meta span:first-child::before {
+      content: "";
+    }
+
+    .section-title {
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .section-heading h3 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .section-heading span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .summary {
+      font-size: 14px;
+      color: #374151;
+    }
+
+    .summary p + p {
+      margin-top: 6px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--chip-bg);
+      border: 1px solid #e0e7ff;
+      color: #4b5563;
+    }
+
+    .timeline-item + .timeline-item {
+      border-top: 1px solid var(--border);
+      margin-top: 14px;
+      padding-top: 14px;
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .role {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .company {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .period-location {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .bullet-list {
+      margin-top: 6px;
+      padding-left: 16px;
+      font-size: 13px;
+      color: #374151;
+    }
+
+    .bullet-list li + li {
+      margin-top: 3px;
+    }
+
+    .sidebar-section + .sidebar-section {
+      margin-top: 18px;
+    }
+
+    .sidebar-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .sidebar-list {
+      list-style: none;
+      font-size: 13px;
+      color: #374151;
+    }
+
+    .sidebar-list li + li {
+      margin-top: 4px;
+    }
+
+    .contact-links a {
+      display: block;
+      font-size: 13px;
+      color: #1f2937;
+      word-break: break-all;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #1d4ed8;
+      font-size: 11px;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    footer {
+      max-width: 1120px;
+      margin: 0 auto 24px;
+      padding: 0 16px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: right;
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <h1 class="brand-title">Digvijay <span>Singh</span></h1>
-        <p class="brand-sub">DevOps / SRE • Kubernetes · Terraform · CI/CD</p>
-      </div>
-      <nav class="top-nav" aria-label="Main navigation">
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#contact" class="cta">Contact</a>
-      </nav>
+  <main class="page">
+    <!-- Left column: main content -->
+    <div>
+      <header class="card">
+        <div class="avatar">
+          <!-- Initials, or replace with an <img> tag for your photo -->
+          DS
+        </div>
+        <div class="header-main">
+          <h1>Digvijay Singh</h1>
+          <h2>DevOps Engineer</h2>
+          <div class="header-meta">
+            <span>Pune, Maharashtra</span>
+            <span>3+ years experience</span>
+            <span>AWS · Kubernetes · Terraform · CI/CD</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="card" aria-labelledby="summary">
+        <div class="section-title" id="summary">Summary</div>
+        <div class="summary">
+          <p>
+            DevOps Engineer with 3+ years of hands-on experience in cloud environments and infrastructure automation.
+            Skilled in CI/CD, Infrastructure as Code (IaC), and Kubernetes-based microservice deployments.
+          </p>
+          <p>
+            Proven track record of migrating applications to Amazon EKS, improving observability with modern monitoring tools,
+            and reducing operational overhead through automation. Comfortable collaborating with cross-functional teams
+            to design, build, and run reliable, scalable systems.
+          </p>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="experience">
+        <div class="section-title" id="experience">Experience</div>
+
+        <article class="timeline-item">
+          <div class="timeline-header">
+            <div>
+              <div class="role">DevOps Engineer</div>
+              <div class="company">Vodafone India Services Pvt. Ltd · MH</div>
+            </div>
+            <div class="period-location">Nov 2022 – Present · Pune, India</div>
+          </div>
+          <ul class="bullet-list">
+            <li>Deployed and managed microservices (e.g., RCMS, Web Proxy) on Kubernetes/EKS, integrating with Kafka and database services.</li>
+            <li>Implemented end-to-end GitHub Actions pipelines for builds, tests, and deployments, reducing manual work and accelerating releases.</li>
+            <li>Onboarded domains in Route 53, configured CloudFront distributions, and served frontend content via S3 for microservice UIs.</li>
+            <li>Migrated microservices (OTP Manager, gateway profile, idhub-ms-authn) to Amazon EKS using Helm and Terraform.</li>
+            <li>Used Argo CD for continuous delivery to EKS, ensuring consistent and repeatable deployments.</li>
+            <li>Monitored EKS clusters using Splunk, Instana, CloudWatch, Dynatrace and other tools for performance and reliability.</li>
+            <li>Designed scalable EKS infrastructure with Terraform, focusing on high availability and cost efficiency.</li>
+            <li>Automated AMI patching for production servers, improving security and compliance with minimal downtime.</li>
+            <li>Created Splunk dashboards, Dynatrace dashboards, and alerts for multiple microservices and web-proxy services.</li>
+            <li>Implemented PagerDuty orchestration and alerting for faster incident detection and response.</li>
+            <li>Managed high-priority production incidents and reduced mean time to resolution (MTTR) by ~30%.</li>
+            <li>Participated in 24x7 on-call rotations, handling both infrastructure and application-level incidents.</li>
+            <li>Upgraded DocumentDB and RabbitMQ clusters with careful planning to avoid downtime.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="card" aria-labelledby="projects">
+        <div class="section-title" id="projects">Projects</div>
+
+        <article class="timeline-item">
+          <div class="section-heading">
+            <h3>AWS EKS Deployments – Personal Projects</h3>
+            <span>Ongoing</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Designed and deployed microservices-based applications (e.g., e-commerce clone, voting app) on AWS EKS.</li>
+            <li>Used Terraform for infrastructure provisioning and Helm for application deployment to Kubernetes.</li>
+            <li>Implemented CI/CD using GitHub Actions and Argo CD for automated builds and rollouts.</li>
+            <li>Integrated monitoring with Prometheus and Grafana for metrics, dashboards, and alerting.</li>
+          </ul>
+          <span class="badge">Terraform · EKS · GitHub Actions · Argo CD · Helm</span>
+        </article>
+      </section>
     </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <h2>Hi — I build resilient cloud systems and automated delivery pipelines.</h2>
-          <p>Experienced in building production-grade Kubernetes platforms, Terraform infrastructure, and CI/CD pipelines using GitHub Actions. I focus on reliability, observability and automation.</p>
-          <div class="hero-actions">
-            <a href="#projects" class="btn">See Projects</a>
-            <a href="mailto:digvijay392001@gmail.com" class="btn btn-outline">Get in touch</a>
-          </div>
+    <!-- Right column: sidebar -->
+    <aside>
+      <section class="card sidebar-section" aria-labelledby="contact">
+        <div class="sidebar-title" id="contact">Contact</div>
+        <div class="contact-links">
+          <a href="mailto:digvijaysingh392001@gmail.com">digvijaysingh392001@gmail.com</a>
+          <a href="tel:+916261569028">+91-62615-69028</a>
+          <a href="https://www.linkedin.com/in/digvijay-singh-768b76176/" target="_blank" rel="noreferrer">
+            linkedin.com/in/digvijay-singh-768b76176
+          </a>
         </div>
-        <div class="hero-card">
-          <div class="card-accent">
-            <h3>Profile</h3>
-            <p><strong>Role:</strong> DevOps / SRE</p>
-            <p><strong>Stack:</strong> Kubernetes · Terraform · Docker · GitHub Actions</p>
-            <p><strong>Location:</strong> India</p>
-          </div>
+      </section>
+
+      <section class="card sidebar-section" aria-labelledby="skills">
+        <div class="sidebar-title" id="skills">Skills</div>
+
+        <h4 class="section-heading" style="margin-bottom:4px;">
+          <span>Cloud & Platform</span>
+        </h4>
+        <div class="chips">
+          <span class="chip">AWS</span>
+          <span class="chip">EKS</span>
+          <span class="chip">Kubernetes</span>
+          <span class="chip">ECS</span>
+          <span class="chip">Load Balancers</span>
+          <span class="chip">VPC</span>
+          <span class="chip">EC2 / AMI</span>
+          <span class="chip">S3</span>
+          <span class="chip">CloudFront</span>
+          <span class="chip">Route 53</span>
+          <span class="chip">RDS</span>
+          <span class="chip">SNS / SQS</span>
+          <span class="chip">SES</span>
+          <span class="chip">Lambda</span>
+          <span class="chip">DocumentDB</span>
+          <span class="chip">Elasticache</span>
+          <span class="chip">EventBridge</span>
+          <span class="chip">SSM</span>
+          <span class="chip">Linux</span>
         </div>
-      </div>
-    </section>
 
-    <section id="projects" class="container projects">
-      <h2 class="section-title">Selected Projects</h2>
-
-      <div class="project-grid">
-        <article class="project-card">
-          <h3><a href="https://github.com/digvijaysingh54/voting-app" target="_blank" rel="noopener">Voting App</a></h3>
-          <p class="muted">React • Node • MongoDB • Deployed to EKS via Terraform + GitHub Actions</p>
-          <ul class="chips">
-            <li>Kubernetes</li>
-            <li>Terraform</li>
-            <li>CI/CD</li>
-          </ul>
-        </article>
-
-        <article class="project-card">
-          <h3><a href="https://github.com/digvijaysingh54/todo-app" target="_blank" rel="noopener">ToDo App (MongoDB)</a></h3>
-          <p class="muted">Express • MongoDB • Docker — Trivy scans and automated CI</p>
-          <ul class="chips">
-            <li>Docker</li>
-            <li>Security</li>
-            <li>Automation</li>
-          </ul>
-        </article>
-
-        <article class="project-card">
-          <h3><a href="#" target="_blank" rel="noopener">K8s Observability Demo</a></h3>
-          <p class="muted">Prometheus • Grafana • Loki — End-to-end observability pipeline</p>
-          <ul class="chips">
-            <li>Monitoring</li>
-            <li>Grafana</li>
-            <li>Logs</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section id="about" class="about container">
-      <div class="about-grid">
-        <div>
-          <h2 class="section-title">About me</h2>
-          <p>I’m Digvijay — I work on cloud-native platforms and automation. I enjoy designing systems that scale reliably and reducing toil through tooling and pipelines. Currently learning advanced GitOps patterns and Kubernetes operators.</p>
+        <h4 class="section-heading" style="margin-top:12px; margin-bottom:4px;">
+          <span>DevOps & IaC</span>
+        </h4>
+        <div class="chips">
+          <span class="chip">Git & GitHub</span>
+          <span class="chip">GitHub Actions</span>
+          <span class="chip">Argo CD</span>
+          <span class="chip">Azure Pipelines</span>
+          <span class="chip">Terraform</span>
+          <span class="chip">CloudFormation</span>
+          <span class="chip">Docker</span>
+          <span class="chip">Helm</span>
         </div>
-        <div>
-          <h3>Skills</h3>
-          <ul class="skill-list">
-            <li>Kubernetes</li>
-            <li>Terraform</li>
-            <li>GitHub Actions</li>
-            <li>Docker</li>
-            <li>Prometheus & Grafana</li>
-            <li>Splunk</li>
-          </ul>
-        </div>
-      </div>
-    </section>
 
-    <section id="contact" class="contact container">
-      <h2 class="section-title">Contact</h2>
-      <p class="muted">Email: <a href="mailto:digvijay392001@gmail.com">digvijay392001@gmail.com</a> • <a href="https://www.linkedin.com/in/digvijay-singh-768b76176/" target="_blank" rel="noopener">LinkedIn</a></p>
-      <p>Or check my repos on <a href="https://github.com/digvijaysingh54" target="_blank" rel="noopener">GitHub</a>.</p>
-    </section>
+        <h4 class="section-heading" style="margin-top:12px; margin-bottom:4px;">
+          <span>Monitoring & Observability</span>
+        </h4>
+        <div class="chips">
+          <span class="chip">Splunk</span>
+          <span class="chip">Instana</span>
+          <span class="chip">CloudWatch</span>
+          <span class="chip">Dynatrace</span>
+          <span class="chip">Grafana</span>
+          <span class="chip">Prometheus</span>
+          <span class="chip">DataDog</span>
+          <span class="chip">PagerDuty</span>
+        </div>
+
+        <h4 class="section-heading" style="margin-top:12px; margin-bottom:4px;">
+          <span>Other</span>
+        </h4>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">Bash</span>
+          <span class="chip">YAML</span>
+          <span class="chip">Apache Kafka</span>
+          <span class="chip">Scrum</span>
+          <span class="chip">Jira</span>
+        </div>
+      </section>
+
+      <section class="card sidebar-section" aria-labelledby="certs">
+        <div class="sidebar-title" id="certs">Certificates</div>
+        <ul class="sidebar-list">
+          <li>HashiCorp Certified: Terraform Associate <span class="badge">Training – Pluralsight</span></li>
+          <li>AWS Solutions Architect – Associate (SAA-C03) <span class="badge">Udemy</span></li>
+          <li>Certified Kubernetes Administrator (CKA) <span class="badge">Udemy</span></li>
+        </ul>
+      </section>
+
+      <section class="card sidebar-section" aria-labelledby="education">
+        <div class="sidebar-title" id="education">Education</div>
+        <ul class="sidebar-list">
+          <li>
+            <strong>B.Tech – Electrical & Electronics</strong><br />
+            Rajiv Gandhi Proudyogiki Vishwavidyalaya, Bhopal<br />
+            CGPA: 8.2 · Jun 2022
+          </li>
+        </ul>
+      </section>
+    </aside>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="year"></span> Digvijay Singh • Built with ❤️</p>
-    </div>
+  <footer>
+    © <span id="year"></span> Digvijay Singh · Portfolio
   </footer>
 
   <script>
-    document.getElementById('year').innerText = new Date().getFullYear();
+    // Auto-set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
