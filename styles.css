@@ -51,7 +51,7 @@ img{max-width:100%;display:block}
 
 /* Hero */
 .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
-@media (max-width:980px){ .hero{grid-template-columns:1fr} .hero-card{order:2} .hero-text{order:1} }
+@media (max-width:600px){ .hero{grid-template-columns:1fr} .hero-card{order:2} .hero-text{order:1} }
 
 .card{
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
