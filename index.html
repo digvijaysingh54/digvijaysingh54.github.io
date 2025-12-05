@@ -2,307 +2,328 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Digvijay Singh — DevOps / SRE</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Digvijay Singh — DevOps / SRE. Kubernetes · Terraform · CI/CD · Observability" />
+  <title>Digvijay Singh — DevOps / SRE</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+
+  <meta name="description" content="Digvijay Singh — DevOps / SRE. Kubernetes, Terraform, CI/CD, GitHub Actions." />
+
   <style>
-    /* ---- layout / theme ---- */
     :root{
-      --bg-1:#0b0b12;
+      --bg-1:#060616;
       --bg-2:#0f1220;
-      --card:#0e1520;
+      --card:#0b0f1a;
       --muted:#9aa3b2;
-      --accent-1:#00f5a0;
-      --accent-2:#00b4ff;
-      --glass: rgba(255,255,255,0.02);
+      --accent-a:#00f5a0;
+      --accent-b:#00b4ff;
+      --glass: rgba(255,255,255,0.03);
       --radius:16px;
+      --max-width:1200px;
     }
-    html,body{height:100%}
+
+    /* Reset & base */
     *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
     body{
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(78, 93, 255, 0.035), transparent 10%),
-                  linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      background: radial-gradient(800px 400px at 10% 10%, rgba(78,93,255,0.035), transparent 10%), linear-gradient(180deg,var(--bg-1),var(--bg-2));
       color: #e6eef8;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      padding:32px;
-    }
-
-    /* container */
-    .wrap{
-      max-width:1150px;
-      margin:0 auto;
-    }
-
-    nav.top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:28px;
-    }
-    .brand { font-weight:700; font-size:24px; }
-    .brand span { color: var(--accent-1); }
-    .nav-links { display:flex; gap:16px; align-items:center; color:var(--muted); }
-    .nav-links a { color:var(--muted); text-decoration:none; font-weight:600; font-size:14px; padding:8px 12px; border-radius:10px; }
-    .nav-links a.cta { background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#061021; box-shadow:0 8px 30px rgba(0,180,255,0.08); }
-
-    /* hero area */
-    .hero {
-      display:grid;
-      grid-template-columns: 1fr 380px;
-      gap:28px;
-      align-items:start;
-    }
-    @media (max-width:980px){ .hero{grid-template-columns:1fr} .profile-card{order:2} .hero-left{order:1} }
-
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius: var(--radius);
+      line-height:1.5;
       padding:28px;
+      -webkit-font-kerning:normal;
+      scroll-behavior:smooth;
+    }
+
+    a{color:inherit}
+    img{max-width:100%;display:block}
+
+    .wrap{max-width:var(--max-width);margin:0 auto}
+
+    /* Top nav */
+    .site-header{padding:8px 0;margin-bottom:18px}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand-title{font-family:Merriweather, serif; font-weight:700; font-size:26px; letter-spacing:-0.02em}
+    .brand-title span{color:var(--accent-a)}
+    .brand-sub{color:var(--muted);font-size:13px;margin-top:4px}
+
+    .top-nav{display:flex;gap:12px;align-items:center}
+    .top-nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:10px;transition:all .18s ease}
+    .top-nav a:hover{color:#fff;transform:translateY(-2px)}
+    .top-nav a.cta{
+      background: linear-gradient(90deg,var(--accent-a),var(--accent-b));
+      color:#061021;
+      box-shadow:0 10px 28px rgba(0,180,255,0.06);
+    }
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
+    @media (max-width:980px){ .hero{grid-template-columns:1fr} .hero-card{order:2} .hero-text{order:1} }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:26px;
       border:1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 12px 40px rgba(6,10,20,0.6);
+      box-shadow: 0 14px 40px rgba(6,10,20,0.6);
     }
 
-    .hero-left h1 {
-      font-size:44px;
-      line-height:1.03;
-      margin-bottom:12px;
-      letter-spacing:-0.02em;
+    .hero-text h2{font-size:40px;line-height:1.02;margin-bottom:12px}
+    @media (max-width:680px){ .hero-text h2{font-size:28px} }
+
+    .lead{color:var(--muted);font-size:15px;margin-bottom:16px;max-width:760px}
+
+    .hero-actions{display:flex;gap:12px;margin-top:6px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;font-weight:700;font-size:14px;border:none;cursor:pointer;text-decoration:none;
+      transition:transform .16s ease, box-shadow .16s ease, opacity .16s ease;
     }
-    .hero-left p.lead {
-      max-width:760px;
-      color:var(--muted);
-      font-size:16px;
-      margin-bottom:18px;
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{
+      background: linear-gradient(90deg,var(--accent-a),var(--accent-b));
+      color:#061021;
+      box-shadow:0 12px 40px rgba(0,180,255,0.08);
     }
-    .actions { display:flex; gap:12px; margin-top:6px; }
-    .btn {
-      display:inline-flex; align-items:center; gap:8px;
-      padding:12px 18px; border-radius:12px; font-weight:700; font-size:14px;
-      border: none; cursor:pointer;
-    }
-    .btn.primary {
-      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-      color: #061021;
-      box-shadow: 0 10px 30px rgba(0,180,255,0.08);
-    }
-    .btn.ghost {
-      background: rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.03);
-      color:#d8eefb;
+    .btn-ghost{
+      background:transparent;border:1px solid rgba(255,255,255,0.04);color:#e6f0ff;
     }
 
-    /* profile card (right) */
-    .profile-card {
-      position:relative;
+    /* small pills under hero */
+    .pills{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+    .pill{background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;font-size:13px;border:1px solid rgba(255,255,255,0.02)}
+
+    /* profile card with tilt */
+    .hero-card .card{padding:18px;border-radius:18px;position:relative;overflow:visible}
+    .profile-title{color:var(--accent-a);font-weight:700;margin-bottom:6px;font-size:18px}
+    .meta-list{color:var(--muted);font-size:14px;line-height:1.6}
+    .profile-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .chip{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;color:var(--muted);font-weight:600;border:1px solid rgba(255,255,255,0.02)}
+
+    /* floating accent behind profile card */
+    .hero-card .accent-blob{
+      position:absolute;right:-36px;top:-36px;width:160px;height:160px;border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(0,245,160,0.15), rgba(0,180,255,0.08));
+      filter: blur(26px); z-index:0; pointer-events:none;
     }
-    .profile-card .card { padding:22px; border-radius:20px; }
-    .profile-card h3{ color:var(--accent-1); margin-bottom:8px; font-size:18px; }
-    .meta-list { color:var(--muted); font-size:14px; margin-bottom:10px; }
-    .meta-list strong{ color:#dbeafe; font-weight:700 }
-    .profile-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
-    .chip { background: rgba(255,255,255,0.02); padding:6px 10px; border-radius:999px; color:var(--muted); font-weight:600; font-size:13px; border:1px solid rgba(255,255,255,0.02) }
+    .hero-card .card > *{position:relative; z-index:1}
 
-    /* main sections below hero */
-    .grid-2 { display:grid; grid-template-columns: 1fr 340px; gap:28px; margin-top:30px; }
-    @media (max-width:980px){ .grid-2{grid-template-columns:1fr} .right-col{order:2} .left-col{order:1} }
+    /* projects grid */
+    .section-title{color:var(--muted);text-transform:uppercase;font-size:12px;letter-spacing:0.12em;margin-bottom:12px}
+    .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media (max-width:980px){ .project-grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:640px){ .project-grid{grid-template-columns:1fr} }
 
-    .section-title { text-transform:uppercase; color:var(--muted); font-size:12px; letter-spacing:0.12em; margin-bottom:12px; }
+    .project-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+      transition:transform .18s ease, box-shadow .18s ease;
+      display:flex;flex-direction:column;gap:8px;
+    }
+    .project-card:hover{transform:translateY(-8px);box-shadow:0 18px 50px rgba(6,10,20,0.6)}
+    .project-card h3{font-size:16px;color:#dbeafe}
+    .project-card .muted{color:var(--muted);font-size:13px}
+    .chips{list-style:none;display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;padding-left:0}
+    .chips li{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.02)}
 
-    /* projects / experience */
-    .project { margin-bottom:16px; }
-    .project h4{ font-size:16px; margin-bottom:6px; color:#dbeafe }
-    .project p{ color:var(--muted); font-size:14px; margin-bottom:6px; }
+    /* about section */
+    .about-grid{display:grid;grid-template-columns:1fr 300px;gap:18px}
+    @media (max-width:980px){ .about-grid{grid-template-columns:1fr} }
 
-    .experience .item { padding:14px; border-radius:12px; background: rgba(255,255,255,0.01); border:1px solid rgba(255,255,255,0.02); margin-bottom:12px; }
-    .exp-top{ display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
-    .exp-role { font-weight:700; color:#e8f6ff; }
-    .exp-company { color:var(--muted); font-size:13px; }
-    .exp-bullets { margin-top:8px; color:var(--muted); font-size:14px; padding-left:16px; }
-    .exp-bullets li { margin-bottom:6px; }
+    .skill-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(2,1fr);gap:8px;color:var(--muted)}
+    .skill-list li{background:rgba(255,255,255,0.01);padding:8px;border-radius:10px;font-weight:700}
 
-    footer { margin-top:36px; color:var(--muted); text-align:center; font-size:13px; }
-    a.small { font-size:13px; color:var(--accent-2) }
+    /* contact & footer */
+    .contact .muted{color:var(--muted)}
+    .site-footer{margin-top:28px;color:var(--muted);text-align:center;font-size:13px}
+
+    /* subtle entrance */
+    .fade-up{opacity:0;transform:translateY(8px);animation:fadeUp .6s ease forwards}
+    @keyframes fadeUp{to{opacity:1;transform:none}}
+
+    /* micro interactions */
+    .profile-tilt{transition:transform .18s ease; will-change:transform}
+    .profile-tilt:hover{transform:rotate(-2deg) translateY(-6px)}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <nav class="top" aria-label="top-nav">
-      <div class="brand">Digvijay <span>Singh</span></div>
-      <div class="nav-links" role="navigation" aria-label="primary">
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#about">About</a>
-        <a class="cta" href="#contact">Contact</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <div>
+          <div class="brand-title">Digvijay <span>Singh</span></div>
+          <div class="brand-sub">DevOps / SRE • Kubernetes · Terraform · CI/CD</div>
+        </div>
+
+        <nav class="top-nav" aria-label="Main navigation">
+          <a href="#projects">Projects</a>
+          <a href="#about">About</a>
+          <a href="#contact" class="cta">Contact</a>
+        </nav>
       </div>
-    </nav>
+    </header>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-left card" aria-labelledby="hero-title">
-        <h1 id="hero-title">Hi — I build resilient cloud systems and automated delivery pipelines.</h1>
-        <p class="lead">
-          Experienced in building production-grade Kubernetes platforms, Terraform infrastructure, and CI/CD pipelines using GitHub Actions.
-          I focus on reliability, observability and automation — deploying and operating microservices on AWS EKS and improving incident response with monitoring and orchestration.
-        </p>
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-text card fade-up" style="padding:28px 30px;">
+          <h2>Hi — I build resilient cloud systems and automated delivery pipelines.</h2>
+          <p class="lead">Experienced in building production-grade Kubernetes platforms, Terraform infrastructure, and CI/CD pipelines using GitHub Actions. I focus on reliability, observability and automation.</p>
 
-        <div class="actions" role="group" aria-label="primary actions">
-          <a class="btn primary" href="#projects">See Projects</a>
-          <a class="btn ghost" href="#contact">Get in touch</a>
-        </div>
-
-        <!-- small summary cards under hero (optional) -->
-        <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
-          <div style="background:rgba(255,255,255,0.02); padding:10px 14px; border-radius:12px; color:var(--muted); font-weight:700">
-            Kubernetes · Terraform
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">See Projects</a>
+            <a class="btn btn-ghost" href="mailto:digvijay392001@gmail.com">Get in touch</a>
+            <!-- resume button: upload your resume as 'resume.pdf' to your repo root or change filename -->
+            <a class="btn btn-ghost" href="resume.pdf" title="Download resume" download>Download Resume</a>
           </div>
-          <div style="background:rgba(255,255,255,0.02); padding:10px 14px; border-radius:12px; color:var(--muted); font-weight:700">
-            GitHub Actions · Argo CD
+
+          <div class="pills">
+            <div class="pill">Kubernetes</div>
+            <div class="pill">Terraform</div>
+            <div class="pill">GitHub Actions</div>
           </div>
         </div>
-      </div>
 
-      <!-- profile card on right -->
-      <aside class="profile-card">
-        <div class="card">
-          <h3>Profile</h3>
-          <div class="meta-list">
-            <div><strong>Role:</strong> DevOps / SRE</div>
-            <div><strong>Stack:</strong> Kubernetes · Terraform · Docker · GitHub Actions</div>
-            <div><strong>Location:</strong> India</div>
-          </div>
-
-          <div class="section-title" style="margin-top:8px">Contact</div>
-          <div style="font-size:14px; color:#cfe8ff; margin-bottom:8px">
-            <div>digvijay392001@gmail.com</div>
-            <div>+91 62615 69028</div>
-            <div style="margin-top:6px"><a class="small" href="https://linkedin.com/in/digvijay-singh-768b76176" target="_blank" rel="noreferrer">LinkedIn</a></div>
-          </div>
-
-          <div class="section-title" style="margin-top:8px">Skills</div>
-          <div class="profile-chips">
-            <span class="chip">AWS</span><span class="chip">EKS</span><span class="chip">Kubernetes</span><span class="chip">Terraform</span>
-            <span class="chip">GitHub Actions</span><span class="chip">Argo CD</span><span class="chip">Docker</span><span class="chip">Splunk</span>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <!-- content area -->
-    <div class="grid-2">
-      <main class="left-col">
-        <section id="projects" class="card" style="margin-bottom:18px">
-          <div class="section-title">Selected Projects</div>
-
-          <div class="project">
-            <h4>Voting App — EKS / Terraform</h4>
-            <p>Deployed a small voting web app to AWS EKS using Terraform for infra and GitHub Actions for CI/CD. Implemented Helm charts, autoscaling and monitoring dashboards.</p>
-          </div>
-
-          <div class="project">
-            <h4>ToDo App — MongoDB-backed</h4>
-            <p>Node/Express app backed by MongoDB, containerized and deployed to Kubernetes. Added Trivy scanning to CI and automated deployment via Argo CD.</p>
-          </div>
-
-          <div class="project">
-            <h4>Observability Demo</h4>
-            <p>Prometheus + Grafana + Loki stack to collect metrics and logs from a demo microservice cluster; created dashboards and alerting rules.</p>
-          </div>
-        </section>
-
-        <section id="experience" class="card experience">
-          <div class="section-title">Experience</div>
-
-          <div class="item">
-            <div class="exp-top">
-              <div>
-                <div class="exp-role">DevOps Engineer</div>
-                <div class="exp-company">Vodafone India Services Pvt. Ltd</div>
-              </div>
-              <div style="color:var(--muted); font-size:13px">Nov 2022 – Present · Pune, India</div>
+        <aside class="hero-card fade-up profile-tilt" style="align-self:start">
+          <div class="card" style="padding:18px 18px 24px">
+            <div class="accent-blob" aria-hidden="true"></div>
+            <div class="profile-title">Profile</div>
+            <div class="meta-list">
+              <div><strong>Role:</strong> DevOps / SRE</div>
+              <div><strong>Stack:</strong> Kubernetes · Terraform · Docker · GitHub Actions</div>
+              <div><strong>Location:</strong> India</div>
             </div>
-            <ul class="exp-bullets">
-              <li>Deployed and managed microservices (RCMS, Web Proxy) on Kubernetes/EKS; integrated with Kafka and databases.</li>
-              <li>Built end-to-end GitHub Actions pipelines for builds, tests, and deployments — reduced manual steps and release time.</li>
-              <li>Migrated microservices (OTP Manager, idhub-ms-authn, gateway profile) to Amazon EKS using Helm & Terraform.</li>
-              <li>Used Argo CD for continuous delivery; created Splunk and Dynatrace dashboards and alerts for services.</li>
-              <li>Implemented PagerDuty orchestration & on-call rotations; improved MTTR by ~30% for critical incidents.</li>
-              <li>Automated AMI patching and managed upgrades for DocumentDB and RabbitMQ with minimal downtime.</li>
-            </ul>
-          </div>
 
-          <!-- older / personal experience -->
-          <div class="item">
-            <div class="exp-top">
-              <div>
-                <div class="exp-role">Personal / Learning Projects</div>
-                <div class="exp-company">Self</div>
-              </div>
-              <div style="color:var(--muted); font-size:13px">2021 – Present</div>
+            <div style="margin-top:12px">
+              <div style="font-weight:700;color:#cfe8ff;margin-bottom:8px">Contact</div>
+              <div style="color:#cfe8ff;font-size:14px">digvijay392001@gmail.com</div>
+              <div style="color:#cfe8ff;font-size:14px">+91 62615 69028</div>
+              <div style="margin-top:8px"><a href="https://www.linkedin.com/in/digvijay-singh-768b76176/" target="_blank" rel="noopener" style="color:var(--accent-b); font-weight:700">LinkedIn</a></div>
             </div>
-            <ul class="exp-bullets">
-              <li>Built sample applications and infra (EKS, Terraform) for learning GitOps, CI/CD and cloud-native architectures.</li>
-              <li>Worked on monitoring, alerting, and automation to improve reliability and deployments.</li>
+
+            <div style="margin-top:12px" class="profile-chips">
+              <span class="chip">AWS</span>
+              <span class="chip">EKS</span>
+              <span class="chip">Argo CD</span>
+              <span class="chip">Splunk</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="wrap" style="margin-top:26px">
+        <div style="max-width:var(--max-width);margin:0 auto">
+          <h2 class="section-title">Selected Projects</h2>
+
+          <div class="project-grid">
+            <article class="project-card fade-up" style="animation-delay:.05s">
+              <h3><a href="https://github.com/digvijaysingh54/voting-app" target="_blank" rel="noopener">Voting App</a></h3>
+              <p class="muted">React • Node • MongoDB • Deployed to EKS via Terraform + GitHub Actions</p>
+              <ul class="chips">
+                <li>Kubernetes</li><li>Terraform</li><li>CI/CD</li>
+              </ul>
+            </article>
+
+            <article class="project-card fade-up" style="animation-delay:.12s">
+              <h3><a href="https://github.com/digvijaysingh54/todo-app" target="_blank" rel="noopener">ToDo App (MongoDB)</a></h3>
+              <p class="muted">Express • MongoDB • Docker — Trivy scans and automated CI</p>
+              <ul class="chips">
+                <li>Docker</li><li>Security</li><li>Automation</li>
+              </ul>
+            </article>
+
+            <article class="project-card fade-up" style="animation-delay:.18s">
+              <h3><a href="#" target="_blank" rel="noopener">K8s Observability Demo</a></h3>
+              <p class="muted">Prometheus • Grafana • Loki — End-to-end observability pipeline</p>
+              <ul class="chips">
+                <li>Monitoring</li><li>Grafana</li><li>Logs</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="container" style="margin-top:28px">
+        <div class="about-grid">
+          <div class="card fade-up">
+            <div class="section-title">About me</div>
+            <p style="color:var(--muted);font-size:15px">
+              I’m Digvijay — I work on cloud-native platforms and automation. I enjoy designing systems that scale reliably and reducing toil through tooling and pipelines. Currently learning advanced GitOps patterns and Kubernetes operators.
+            </p>
+
+            <div style="margin-top:14px">
+              <div class="section-title">Education</div>
+              <p style="color:var(--muted);font-size:14px">
+                <strong>B.Tech – Electrical & Electronics</strong><br/>
+                Rajiv Gandhi Proudyogiki Vishwavidyalaya, Bhopal · CGPA: 8.2 · Jun 2022
+              </p>
+            </div>
+          </div>
+
+          <aside class="card fade-up" style="padding:20px">
+            <div class="section-title">Skills</div>
+            <ul class="skill-list" style="margin-top:8px">
+              <li>Kubernetes</li>
+              <li>Terraform</li>
+              <li>GitHub Actions</li>
+              <li>Docker</li>
+              <li>Prometheus & Grafana</li>
+              <li>Splunk</li>
             </ul>
-          </div>
-        </section>
 
-        <section id="about" class="card" style="margin-top:18px">
-          <div class="section-title">About / Summary</div>
-          <p style="color:var(--muted); font-size:15px">
-            DevOps Engineer with 3+ years of hands-on experience in cloud environments and infrastructure automation. Skilled in building CI/CD pipelines,
-            Infrastructure as Code with Terraform, and operating Kubernetes-based microservice platforms. Passionate about reliability, observability and automation.
-          </p>
+            <div style="margin-top:14px">
+              <div class="section-title">Certifications</div>
+              <p style="color:var(--muted);font-size:14px">Terraform Associate · AWS Solutions Architect (Associate) · CKA (studying)</p>
+            </div>
+          </aside>
+        </div>
+      </section>
 
-          <div style="margin-top:14px">
-            <div class="section-title">Education</div>
-            <p style="color:var(--muted); font-size:14px">
-              <strong>B.Tech – Electrical & Electronics</strong><br/>
-              Rajiv Gandhi Proudyogiki Vishwavidyalaya, Bhopal · CGPA: 8.2 · Jun 2022
-            </p>
-          </div>
-
-          <div style="margin-top:14px">
-            <div class="section-title">Certifications</div>
-            <p style="color:var(--muted); font-size:14px">
-              HashiCorp Certified: Terraform Associate • AWS Solutions Architect (Associate) • CKA (studying)
-            </p>
-          </div>
-        </section>
-      </main>
-
-      <!-- right column: quick contact + skills -->
-      <aside class="right-col">
-        <div class="card">
+      <!-- Contact -->
+      <section id="contact" class="contact" style="margin-top:28px">
+        <div class="card" style="padding:20px">
           <div class="section-title">Contact</div>
-          <div style="color:#cfe8ff; font-weight:700; margin-bottom:8px">digvijay392001@gmail.com</div>
-          <div style="color:#cfe8ff; font-weight:700; margin-bottom:8px">+91 62615 69028</div>
-          <div style="margin-top:8px"><a class="small" href="https://github.com/digvijaysingh54" target="_blank" rel="noreferrer">github.com/digvijaysingh54</a></div>
-
-          <div class="section-title" style="margin-top:18px">Technical Skills</div>
-          <div style="display:flex;flex-wrap:wrap;gap:8px">
-            <div class="chip">Kubernetes</div><div class="chip">EKS</div><div class="chip">Terraform</div><div class="chip">GitHub Actions</div>
-            <div class="chip">Argo CD</div><div class="chip">Docker</div><div class="chip">Splunk</div><div class="chip">Prometheus</div>
-          </div>
-
-          <div class="section-title" style="margin-top:18px">Tools & Misc</div>
-          <div style="color:var(--muted) ; font-size:14px; margin-top:6px">
-            Linux · Bash · Python · Helm · Grafana · Dynatrace · CloudWatch · Route53 · S3 · RDS
-          </div>
+          <p class="muted">Email: <a href="mailto:digvijay392001@gmail.com">digvijay392001@gmail.com</a> • <a href="https://www.linkedin.com/in/digvijay-singh-768b76176/" target="_blank" rel="noopener">LinkedIn</a></p>
+          <p style="margin-top:8px">Or check my repos on <a href="https://github.com/digvijaysingh54" target="_blank" rel="noopener" style="color:var(--accent-b)">GitHub</a>.</p>
         </div>
-      </aside>
-    </div>
+      </section>
 
-    <footer>
-      © <span id="year"></span> Digvijay Singh · <a class="small" href="#contact">Get in touch</a>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap" style="padding-top:18px;padding-bottom:28px">
+        <p>© <span id="year"></span> Digvijay Singh • Built with ❤️</p>
+      </div>
     </footer>
   </div>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // set year
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    // light tilt: follow pointer for micro-interaction on profile card
+    (function(){
+      const card = document.querySelector('.profile-tilt');
+      if(!card) return;
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const cx = rect.width/2, cy = rect.height/2;
+        const dx = (x - cx) / cx;
+        const dy = (y - cy) / cy;
+        const rx = dy * 6; // tilt amount
+        const ry = dx * -6;
+        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    })();
   </script>
 </body>
 </html>
